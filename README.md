@@ -1,12 +1,8 @@
-# gfh-ups-tracking-checker
+# UPS Tracking Checker
 
-Standalone GFH Telecom Tkinter tool: `gfh_ups_tracking_checker.pyw` — UPS package tracking
-verification via Selenium/Edge.
+Batch **tracking-number lookup** via Edge automation: paste/import a list of
+UPS tracking numbers, the tool checks each one in a real browser session and
+writes statuses back to Excel.
 
-Fixed: the "Progress & Results" log panel was cramped (window capped at
-800px wide, 50/50 split with the input panel). Window widened to 1150px
-max and the panel split rebalanced 40/60 in favor of the log.
-
-Builds a Windows EXE automatically via GitHub Actions on every push to
-`main` (uploaded directly to the repo's Releases page — no Actions
-storage used), and via CircleCI once the repo is connected at circleci.com.
+## Build
+Windows EXE built via GitHub Actions on push.
