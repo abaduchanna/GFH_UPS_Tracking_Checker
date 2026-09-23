@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         app:
-          - gfh_ups_tracking_checker
+          - GFH_UPS_Tracking_Checker
 
     steps:
       - name: Checkout

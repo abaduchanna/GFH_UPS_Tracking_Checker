@@ -16,7 +16,7 @@ Paste tracking numbers, checks each one via headless Edge, saves CSV.
   - Edge browser automation (headless)
   - Cancel operation at any time
 
-Ship this file together with gfh_icon_white.ico and GFH_Telecom_Logo.png
+Ship this file together with GFH_icon_white.ico and GFH_Telecom_Logo.png
 in the same folder for the window/taskbar icon and header logo.
 
 Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved.
@@ -82,7 +82,7 @@ LIGHT = "#f6f7fb"
 LOG_BG   = "#10182e"
 LOG_FG   = "#a8d8ff"
 
-ICON_ICO_NAME = "gfh_icon.ico"
+ICON_ICO_NAME = "GFH_icon.ico"
 LOGO_PNG_NAME = "GFH_Telecom_Logo.png"
 COPYRIGHT_TEXT = f"Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved."
 ICON_ICO_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "icon_ico_b64.txt"), "r").read().strip() if not getattr(sys, "frozen", False) else open(os.path.join(getattr(sys, "_MEIPASS", "."), "assets", "icon_ico_b64.txt"), "r").read().strip()
@@ -126,7 +126,7 @@ def _set_window_icon(root):
     # 1. Try sys._MEIPASS (PyInstaller onefile extraction dir)
     meipass = getattr(sys, "_MEIPASS", None)
     if meipass:
-        ico_path = os.path.join(meipass, "gfh_icon.ico")
+        ico_path = os.path.join(meipass, "GFH_icon.ico")
         if os.path.exists(ico_path):
             try:
                 root.iconbitmap(default=ico_path)
@@ -140,7 +140,7 @@ def _set_window_icon(root):
         base_dir = os.path.dirname(sys.executable)
     else:
         base_dir = os.path.dirname(os.path.abspath(__file__))
-    ico_path = os.path.join(base_dir, "gfh_icon.ico")
+    ico_path = os.path.join(base_dir, "GFH_icon.ico")
     if os.path.exists(ico_path):
         try:
             root.iconbitmap(default=ico_path)
@@ -500,7 +500,7 @@ class UPSGuiApp:
         root.configure(bg=LIGHT)
         root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
-        self.theme_manager = ThemeManager("GFH UPS Tracking Checker", app_name="gfh-ups-tracking-checker")
+        self.theme_manager = ThemeManager("GFH UPS Tracking Checker", app_name="GFH-UPS-Tracking-Checker")
         self._styles(); self._header(); self._body(); self._copyright_bar()
         apply_theme_to_window(self.root, self.theme_manager)
         self.process_queue()

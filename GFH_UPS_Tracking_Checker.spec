@@ -4,14 +4,14 @@ _year = _dt.date.today().year
 
 SPEC_DOC = f"""PyInstaller spec
 Developed by www.3SVerse.com \u00a9 {_year}
-Build command: pyinstaller gfh_ups_tracking_checker.spec
+Build command: pyinstaller GFH_UPS_Tracking_Checker.spec
 """
 
 
 block_cipher = None
 
 a = Analysis(
-    ['gfh_ups_tracking_checker.py'],
+    ['GFH_UPS_Tracking_Checker.py'],
     pathex=['.'],
     binaries=[],
     datas=[
@@ -101,7 +101,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='gfh_ups_tracking_checker',
+    name='GFH_UPS_Tracking_Checker',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -113,5 +113,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='gfh_icon.ico',
+    icon='GFH_icon.ico',
 )
