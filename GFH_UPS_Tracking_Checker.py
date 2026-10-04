@@ -536,7 +536,7 @@ class UPSGuiApp:
         s.configure("Run.TButton", background=RED, foreground=WHITE,
                     font=("Segoe UI", 11, "bold"), padding=(16, 9), borderwidth=0)
         s.map("Run.TButton",
-              background=[("active", "#c01820"), ("disabled", "#aaa")])
+              background=[("active", "#c82020"), ("disabled", "#aaa")])
         s.configure("Browse.TButton", background=NAVY, foreground=WHITE,
                     font=("Segoe UI", 10), padding=(10, 6), borderwidth=0)
         s.map("Browse.TButton", background=[("active", "#1a2550")])
