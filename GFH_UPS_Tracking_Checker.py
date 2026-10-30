@@ -65,14 +65,6 @@ try:
     HAS_PIL = True
 except ImportError:
     HAS_PIL = False
-    try:
-        subprocess.run([sys.executable, "-m", "pip", "install", "pillow",
-                        "--quiet", "--disable-pip-version-check"],
-                       capture_output=True)
-        from PIL import Image as _PI, ImageTk as _PIT
-        HAS_PIL = True
-    except Exception:
-        pass
 
 # ─────────────────────────────────────────────────────────────────────────────
 # BRAND / WINDOW CONFIG  (kept in sync with GFH_Inventory_Aging_Processor.pyw)
@@ -744,13 +736,19 @@ class UPSGuiApp:
         self.status_label.pack(side="right")
 
     def _copyright_bar(self):
+        # Keep a single footer if the UI is rebuilt on the existing root.
+        for child in self.root.winfo_children():
+            if getattr(child, "_tag", None) == "footer":
+                child.destroy()
         bar = tk.Frame(self.root, bg=NAVY, height=26)
         bar.pack(fill="x", side="bottom"); bar.pack_propagate(False)
         bar._tag = "footer"
+        self.footer_frame = bar
         lbl = tk.Label(bar, text=COPYRIGHT_TEXT, bg=NAVY, fg="#c7cbe0",
                  font=("Segoe UI", 8))
         lbl.place(relx=0.5, rely=0.5, anchor="center")
         lbl._tag = "footer"
+        self.footer_label = lbl
 
     # ── GUI logic methods ──────────────────────────────────────────────────
     def log_message(self, level: str, message: str):
