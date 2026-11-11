@@ -17,6 +17,7 @@ jobs:
       matrix:
         app:
           - GFH_UPS_Tracking_Checker
+          - GFH_UPS_Tracking_Checker_Qt
 
     steps:
       - name: Checkout
