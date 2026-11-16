@@ -80,6 +80,22 @@ LIGHT = "#f6f7fb"
 LOG_BG   = "#10182e"
 LOG_FG   = "#a8d8ff"
 
+# Log tag colors follow the theme: pastel on dark, darker shades on light
+# (fixed pastels washed out on the light theme's white log, ~1.6:1 contrast).
+LOG_TAG_COLORS = {"success": "#68D391", "error": "#FC8181",
+                  "info": "#90CDF4", "warning": "#F6E05E"}
+LOG_TAG_COLORS_LIGHT = {"success": "#2F855A", "error": "#C53030",
+                        "info": "#2B6CB0", "warning": "#B7791F"}
+
+
+# Log tag colors follow the theme: pastel on dark, darker shades on light
+# (fixed pastels washed out on the light theme's white log, ~1.6:1 contrast).
+LOG_TAG_COLORS = {"success": "#68D391", "error": "#FC8181",
+                  "info": "#90CDF4", "warning": "#F6E05E"}
+LOG_TAG_COLORS_LIGHT = {"success": "#2F855A", "error": "#C53030",
+                        "info": "#2B6CB0", "warning": "#B7791F"}
+
+
 ICON_ICO_NAME = "GFH_icon.ico"
 LOGO_PNG_NAME = "GFH_Telecom_Logo.png"
 COPYRIGHT_TEXT = f"Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved."
@@ -617,6 +633,38 @@ class UPSGuiApp:
             pass
 
 
+    def _apply_log_tag_colors(self):
+        """Log tag colors follow the theme (pastel on dark, darker on light)
+        - fixed pastels washed out on the light theme's white log."""
+        log_widget = getattr(self, "output_log", None) or getattr(self, "log_w", None)
+        if log_widget is None:
+            return
+        palette = (LOG_TAG_COLORS_LIGHT
+                   if getattr(getattr(self, "theme_manager", None),
+                              "current_theme", "dark") == "light"
+                   else LOG_TAG_COLORS)
+        for tag, clr in palette.items():
+            try:
+                log_widget.tag_config(tag, foreground=clr)
+            except Exception:
+                pass
+
+    def _apply_log_tag_colors(self):
+        """Log tag colors follow the theme (pastel on dark, darker on light)
+        - fixed pastels washed out on the light theme's white log."""
+        log_widget = getattr(self, "output_log", None) or getattr(self, "log_w", None)
+        if log_widget is None:
+            return
+        palette = (LOG_TAG_COLORS_LIGHT
+                   if getattr(getattr(self, "theme_manager", None),
+                              "current_theme", "dark") == "light"
+                   else LOG_TAG_COLORS)
+        for tag, clr in palette.items():
+            try:
+                log_widget.tag_config(tag, foreground=clr)
+            except Exception:
+                pass
+
     def _apply_theme(self, colors=None):
         """Apply theme colors to all widgets EXCEPT header (header stays navy)."""
         import tkinter as tk
@@ -658,6 +706,10 @@ class UPSGuiApp:
             except Exception:
                 pass
         _walk(self.root)
+        self._apply_log_tag_colors()
+        self._apply_log_tag_colors()
+        self._apply_log_tag_colors()
+        self._apply_log_tag_colors()
 
 
     def _body(self):
@@ -704,9 +756,7 @@ class UPSGuiApp:
             right, height=10, font=("Consolas", 9), wrap=tk.WORD,
             bg=LOG_BG, fg=LOG_FG, relief="flat")
         self.output_log.pack(fill="both", expand=True)
-        for tag, clr in [("success", "#68D391"), ("error", "#FC8181"),
-                         ("info", "#90CDF4"), ("warning", "#F6E05E")]:
-            self.output_log.tag_config(tag, foreground=clr)
+        self._apply_log_tag_colors()
 
         # ── Progress bar ───────────────────────────────────────────────────
         self.progress_var = tk.DoubleVar()
